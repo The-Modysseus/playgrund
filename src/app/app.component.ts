@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
+import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
+import { Playground } from './shared/playground';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  imports: [SidebarComponent, FooterComponent]
 })
 export class AppComponent {
-  title = 'playgrund';
+
+  appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
+  playground?: Playground;
+
+  playgroundSelected(playground: Playground) {
+    console.log(playground);
+    this.playground = playground;
+  }
 }

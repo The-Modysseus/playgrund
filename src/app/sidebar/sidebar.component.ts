@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
-import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
-import { Playground } from '../shared/playground';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Playground } from '../shared';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
   standalone: true,
 })
 export class SidebarComponent {
-  playgrounds: Playground[] = MOCK_PLAYGROUNDS;
+  @Input() playgrounds?: Playground[];
+  @Output() selected = new EventEmitter<Playground>();
+
+  selectedPlayground?: Playground;
+
+  selectPlayground(playground: Playground) {
+    this.selectedPlayground = playground;
+    this.selected.emit(playground);
+  }
 }
